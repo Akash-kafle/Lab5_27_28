@@ -18,7 +18,7 @@ Graph generateRandomGraph(int numVertices, int numEdges)
     }
 
     // Add random edges to the graph.
-    for (int i = 0; i < numEdges; ++i)
+    for (int i = 1; i < numEdges; ++i)
     {
         int vertex1 = std::rand() % numVertices; // Generate a random vertex index.
         int vertex2 = std::rand() % numVertices; // Generate another random vertex index.
@@ -61,13 +61,6 @@ int main()
         g.addEdge(vertex1, vertex2, weight);
     }
 
-    auto mst = g.min_spanning_tree(0);
-    print("Minimum Spanning Tree: "), print("\n");
-    for (const auto &[vertex, weight] : mst)
-    {
-        print("Vertex: "), print(vertex), print(" Weight"), print(weight), print("\n");
-    }
-
     Graph randomGraph = generateRandomGraph(5, 10);
     print("\n"), print("Random Graph: "), print("\n");
     for (const auto &[vertex, neighbours] : randomGraph.getVertices())
@@ -78,13 +71,10 @@ int main()
             print("Neighbour: "), print(neighbour), print(" Weight: "), print(weight), print("\n");
         }
     }
-
-    auto minSpanningTree = randomGraph.min_spanning_tree(0);
-    print("\n"), print("Minimum Spanning Tree: "), print("\n");
-    for (const auto &[vertex, weight] : minSpanningTree)
-    {
-        print("Vertex: "), print(vertex), print(" Weight: "), print(weight), print("\n");
-    }
+    print("\n"), print("Breadth-First Traversal: "), print("\n");
+    BFT(randomGraph, 0);
+    print("\n"), print("Depth-First Traversal: "), print("\n");
+    DFT(randomGraph, 0);
     return 0;
 }
 

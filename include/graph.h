@@ -33,7 +33,7 @@ public:
     int degree(int vertex) const;
     std::vector<int> neighbours(int vertex) const;
     bool neighbour(int vertex1, int vertex2) const;
-    std::unordered_map<int, int> min_spanning_tree(int start) const;
+    // std::unordered_map<int, int> min_spanning_tree(int start) const; // Yet to be implemented
     std::unordered_map<int, std::unordered_map<int, int>> getVertices() const
     {
         return vertices;
@@ -44,3 +44,6 @@ private:
     bool directed;
     int edge_count;
 };
+
+void BFT(const Graph &graph, int start);
+void DFT(const Graph &graph, int start);

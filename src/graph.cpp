@@ -151,7 +151,7 @@ bool Graph::neighbour(int vertex1, int vertex2) const
 /**
  * Performs a breadth-first traversal of the graph starting from the given vertex.
  */
-void BFT(const Graph &graph, int start, int end)
+void BFT(const Graph &graph, int start)
 {
     if (graph.isEmpty())
     {
@@ -180,7 +180,7 @@ void BFT(const Graph &graph, int start, int end)
 /**
  * Performs a depth-first traversal of the graph starting from the given vertex.
  */
-void DFT(const Graph &graph, int start, int end)
+void DFT(const Graph &graph, int start)
 {
     if (graph.isEmpty())
     {
@@ -206,48 +206,50 @@ void DFT(const Graph &graph, int start, int end)
     }
 }
 
-/**
- * Calculates the minimum spanning tree of the graph starting from the given vertex.
- *
- * @param start The starting vertex for calculating the minimum spanning tree.
- * @return An unordered map representing the minimum spanning tree, where the key is the vertex and the value is the weight of the edge connecting it to the tree.
- */
-std::unordered_map<int, int> Graph::min_spanning_tree(int start) const
-{
-    std::unordered_map<int, int> mst; // Renamed result to mst for clarity
-    std::unordered_set<int> visited;
-    std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, std::greater<>> pq; // Using priority queue to automatically sort edges by weight
+// This is yet to be finished properly
 
-    // Initialize by adding all edges from the start vertex to the priority queue
-    for (const auto &[neighbour, weight] : vertices.at(start))
-    {
-        pq.push({weight, {start, neighbour}});
-    }
+// /**
+//  * Calculates the minimum spanning tree of the graph starting from the given vertex.
+//  *
+//  * @param start The starting vertex for calculating the minimum spanning tree.
+//  * @return An unordered map representing the minimum spanning tree, where the key is the vertex and the value is the weight of the edge connecting it to the tree.
+//  */
+// std::unordered_map<int, int> Graph::min_spanning_tree(int start) const
+// {
+//     std::unordered_map<int, int> mst; // Renamed result to mst for clarity
+//     std::unordered_set<int> visited;
+//     std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, std::greater<>> pq; // Using priority queue to automatically sort edges by weight
 
-    visited.insert(start); // Mark the start vertex as visited
+//     // Initialize by adding all edges from the start vertex to the priority queue
+//     for (const auto &[neighbour, weight] : vertices.at(start))
+//     {
+//         pq.push({weight, {start, neighbour}});
+//     }
 
-    while (!pq.empty() && visited.size() < vertices.size())
-    {
-        auto [weight, edge] = pq.top();
-        pq.pop();
-        auto [u, v] = edge;
+//     visited.insert(start); // Mark the start vertex as visited
 
-        // If v is not visited, it's a valid edge in the MST
-        if (visited.count(v) == 0)
-        {
-            visited.insert(v); // Mark v as visited
-            mst[v] = weight;   // Add edge to the MST
+//     while (!pq.empty() && visited.size() < vertices.size())
+//     {
+//         auto [weight, edge] = pq.top();
+//         pq.pop();
+//         auto [u, v] = edge;
 
-            // Add all edges from the newly visited vertex to the priority queue
-            for (const auto &[neighbour, nextWeight] : vertices.at(v))
-            {
-                if (visited.count(neighbour) == 0)
-                {
-                    pq.push({nextWeight, {v, neighbour}});
-                }
-            }
-        }
-    }
+//         // If v is not visited, it's a valid edge in the MST
+//         if (visited.count(v) == 0)
+//         {
+//             visited.insert(v); // Mark v as visited
+//             mst[v] = weight;   // Add edge to the MST
 
-    return mst; // Return the MST
-}
+//             // Add all edges from the newly visited vertex to the priority queue
+//             for (const auto &[neighbour, nextWeight] : vertices.at(v))
+//             {
+//                 if (visited.count(neighbour) == 0)
+//                 {
+//                     pq.push({nextWeight, {v, neighbour}});
+//                 }
+//             }
+//         }
+//     }
+
+//     return mst; // Return the MST
+// }
